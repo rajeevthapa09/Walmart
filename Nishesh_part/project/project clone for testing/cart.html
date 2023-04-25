@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link href="StyleSheet.css" rel="styleSheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-div" id="walmart-div">
+            <h1>Walmart</h1><img src="walmart_blue.jpg" alt="Walmart Logo">
+        </div>
+        <div class="header-div" id="departments-div">
+            <img src="departments.jpg" alt="Departments Icon" style="height: 20px;">
+            Departments
+        </div>
+        <div class="header-div" id="services-div">
+            <img src="services.jpg" alt="Services Icon" style="height: 20px;">
+            Services
+        </div>
+        <input type="text" class="search-bar" placeholder="Search">
+        <input class="search-button" type="button" value="🔍︎">
+        <div class="header-div" id="right-button1-div">
+            <div>
+                <font size=3px>Recorder</font></br>
+                ♡My Item
+            </div>
+        </div>
+        <div class="header-div" id="right-button2-div">
+            <div>
+                <font size=1>SignIn</font></br>
+                👤Account
+            </div>
+        </div>
+        <div class="header-div" id="cart-button">
+            <h1>🛒 </h1> 0 </br>
+        </div>
+    </header>
+    <div id="cart-container" class="display-container"></div>
+    <script>
+        let cartCount = 0;
+        let cartAmount = 0;
+
+        // Retrieve items from localStorage
+        let items = JSON.parse(localStorage.getItem('items')) || [];
+
+        // Retrieve cart items from localStorage
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        // Loop through items and display only the ones that have been added to the cart
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            if (cartItems.includes(i)) {
+                // Create image-container div
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'image-container';
+
+                // Create image-div div
+                const imageDiv = document.createElement('div');
+                imageDiv.className = 'image-div';
+
+                // Create item-image img
+                const itemImage = document.createElement('img');
+                itemImage.className = 'item-image';
+                itemImage.src = 'sampleImage.jpeg';
+                itemImage.alt = 'Sample image';
+
+                // Append item-image to image-div
+                imageDiv.appendChild(itemImage);
+
+                // Create button-container div
+                const buttonContainer = document.createElement('div');
+                buttonContainer.className = 'button-container';
+
+                // Create remove button
+                const removeButton = document.createElement('input');
+                removeButton.type = 'button';
+                removeButton.value = 'Remove';
+                removeButton.id = 'remove-button-' + i;
+                removeButton.onclick = function () { removeFromCart(i) }; //
+                removeButton.setAttribute('class', 'removeButton');
+
+                // Append remove button to button-container
+                buttonContainer.appendChild(removeButton);
+
+                // Create item-textbox div
+                const itemTextbox = document.createElement('div');
+                itemTextbox.className = 'item-textbox';
+
+                // Create item description paragraph
+                const itemDescription = document.createElement('p');
+                itemDescription.innerHTML = '<b>' + item.price + '</b></br>' + item.description + '</br>' + item.rating;
+
+                // Append item description to item-textbox
+                itemTextbox.appendChild(itemDescription);
+
+                // Append image-div, button-container, and item-textbox to image-container
+                imageContainer.appendChild(imageDiv);
+                imageContainer.appendChild(buttonContainer);
+                imageContainer.appendChild(itemTextbox);
+
+                // Append image-container to body
+                document.getElementById('cart-container').appendChild(imageContainer);
+
+                // Update cart count and amount
+                cartCount += 1;
+                cartAmount += parseFloat(item.price.slice(1));
+            }
+        }
+
+        // Update cart count and amount in the header
+        let cartButton = document.getElementById('cart-button');
+        cartButton.innerHTML = '<h1>🛒 </h1>' + cartCount + '</br>' + '$' + cartAmount.toFixed(2);
+
+        // Function to remove an item from the cart
+        function removeFromCart(index) {
+            // Remove item from cart in localStorage
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            let itemIndex = cartItems.indexOf(index);
+            if (itemIndex !== -1) {
+                cartItems.splice(itemIndex, 1);
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            }
+
+            // Reload the page to update the display
+            location.reload();
+        }
+    </script>
+</body>
+
+</html>

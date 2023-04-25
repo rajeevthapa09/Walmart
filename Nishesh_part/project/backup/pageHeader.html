@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage</title>
+    <link href="StyleSheet.css" rel="styleSheet">
+
+
+
+</head>
+
+<body>
+    <script>
+        let cartCount = 0;
+        let cartAmount = 0;
+    </script>
+    <header class="header">
+        <div class="header-div" id="walmart-div">
+            <h1>Walmart</h1><img src="walmart_blue.jpg" alt="Walmart Logo">
+        </div>
+        <div class="header-div" id="departments-div">
+            <img src="departments.jpg" alt="Departments Icon" style="height: 20px;">
+            Departments
+        </div>
+        <div class="header-div" id="services-div">
+            <img src="services.jpg" alt="Services Icon" style="height: 20px;">
+            Services
+        </div>
+        <input type="text" class="search-bar" placeholder="Search">
+        <input class="search-button" type="button" value="🔍︎">
+        <div class="header-div" id="right-button1-div">
+            <div>
+                <font size=3px>Recorder</font></br>
+                ♡My Item
+            </div>
+        </div>
+        <div class="header-div" id="right-button2-div">
+            <div>
+                <font size=1>SignIn</font></br>
+                👤Account
+            </div>
+        </div>
+        <div class="header-div" id="cart-button">
+            <h1>🛒 </h1> 0 </br>
+        </div>
+    </header>
+    <div class="second-header">
+        <div class="second-header-div"><b>How do you want your item?</b></div>
+        <div class="second-header-div">Fairfield, 52557 Fairfield Supercenter</div>
+        <div class="second-header-div">Flash picks</div>
+        <div class="second-header-div">Mother's day</div>
+        <div class="second-header-div">Grocery & essentials</div>
+        <div class="second-header-div">Fashion</div>
+        <div class="second-header-div">Home</div>
+        <div class="second-header-div">Tech</div>
+        <div class="second-header-div">Auto</div>
+        <div class="second-header-div">Registry</div>
+    </div>
+
+    <script>
+        let items = [
+            { price: '$19.99', description: 'Item 1 description', rating: '★★★★' },
+            { price: '$29.99', description: 'Item 2 description', rating: '★★★' },
+            { price: '$39.99', description: 'Item 3 description', rating: '★★★★★' },
+            { price: '$19.99', description: 'Item 1 description', rating: '★★★★' },
+            { price: '$29.99', description: 'Item 2 description', rating: '★★★' },
+            { price: '$39.99', description: 'Item 3 description', rating: '★★★★★' },
+            { price: '$19.99', description: 'Item 1 description', rating: '★★★★' },
+            { price: '$29.99', description: 'Item 2 description', rating: '★★★' },
+            { price: '$39.99', description: 'Item 3 description', rating: '★★★★★' },
+            { price: '$19.99', description: 'Item 1 description', rating: '★★★★' },
+            { price: '$29.99', description: 'Item 2 description', rating: '★★★' },
+            { price: '$39.99', description: 'Item 3 description', rating: '★★★★★' },
+            // add more items as needed
+        ];
+
+
+
+
+        // Create display-container div
+        const displayContainer = document.createElement('div');
+        displayContainer.className = 'display-container';
+
+
+
+        function addToCart(index) {
+            cartCount += 1;
+            let itemPrice = parseFloat(items[index].price.replace('$', ''));
+            cartAmount += itemPrice;
+            console.log(`Cart count: ${cartCount}, Cart amount: $${cartAmount.toFixed(2)}`);
+
+            // Add item to cart in localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(items[index]);
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Update cart count and amount in the header
+            let cartButton = document.getElementById("cart-button");
+            cartButton.innerHTML = "<h1>🛒 </h1>" + cartCount + "</br>" + "$" + cartAmount.toFixed(2);
+        }
+
+
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+
+            // Create image-container div
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'image-container';
+            imageContainer.id = 'image-container-' + i;
+
+            // Create image-div div
+            const imageDiv = document.createElement('div');
+            imageDiv.className = 'image-div';
+            imageDiv.id = 'image-div-' + i;
+
+            // Create item-image img
+            const itemImage = document.createElement('img');
+            itemImage.className = 'item-image';
+            itemImage.src = 'sampleImage.jpeg';
+            itemImage.alt = 'Sample image';
+
+            // Append item-image to image-div
+            imageDiv.appendChild(itemImage);
+
+            // Create button-container div
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'button-container';
+            buttonContainer.id = 'button-container-' + i;
+
+            // Create add button
+            const addButton = document.createElement('input');
+            addButton.type = 'button';
+            addButton.value = '+ Add';
+            addButton.id = 'add-button-' + i;
+            addButton.onclick = function () { addToCart(i) }; // Update this line
+            addButton.setAttribute('class', 'addButton');
+
+            // Append add button to button-container
+            buttonContainer.appendChild(addButton);
+
+            // Create item-textbox div
+            const itemTextbox = document.createElement('div');
+            itemTextbox.className = 'item-textbox';
+            itemTextbox.id = 'item-textbox-' + i;
+
+            // Create item description paragraph
+            const itemDescription = document.createElement('p');
+            itemDescription.innerHTML = '<b>' + item.price + '</b></br>' + item.description + '</br>' + item.rating;
+
+            // Append item description to item-textbox
+            itemTextbox.appendChild(itemDescription);
+
+            // Append image-div, button-container, and item-textbox to image-container
+            imageContainer.appendChild(imageDiv);
+            imageContainer.appendChild(buttonContainer);
+            imageContainer.appendChild(itemTextbox);
+
+            // Append image-container to body
+            displayContainer.appendChild(imageContainer);
+        }
+        document.body.append(displayContainer)
+
+    </script>
+</body>
+
+</html>

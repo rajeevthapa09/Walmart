@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage</title>
+    <link href="StyleSheet.css" rel="styleSheet">
+
+
+
+</head>
+
+<body>
+    <script>
+        let cartCount = 0;
+        let cartAmount = 0;
+    </script>
+    <header class="header">
+        <div class="header-div" id="walmart-div">
+            <h1>Walmart</h1><img src="walmart_blue.jpg" alt="Walmart Logo">
+        </div>
+        <div class="header-div" id="departments-div">
+            <img src="departments.jpg" alt="Departments Icon" style="height: 20px;">
+            Departments
+        </div>
+        <div class="header-div" id="services-div">
+            <img src="services.jpg" alt="Services Icon" style="height: 20px;">
+            Services
+        </div>
+        <input type="text" class="search-bar" placeholder="Search">
+        <input class="search-button" type="button" value="🔍︎">
+        <div class="header-div" id="right-button1-div">
+            <div>
+                <font size=3px>Recorder</font></br>
+                ♡My Item
+            </div>
+        </div>
+        <div class="header-div" id="right-button2-div">
+            <div>
+                <font size=1>SignIn</font></br>
+                👤Account
+            </div>
+        </div>
+        <div class="header-div" id="cart-button">
+            <h1>🛒 </h1> 0 </br>
+        </div>
+    </header>
+    <div id="cart-container"></div>
+    <script>
+        function displayCartItems() {
+            
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cartCount = 0;
+            cartAmount = 0;
+            cart.forEach(item => {
+                cartCount += item.quantity;
+                cartAmount += parseFloat(item.item.price.replace('$', '')) * item.quantity;
+            });
+
+            let cartButton = document.getElementById("cart-button");
+            cartButton.innerHTML = "<h1>🛒 </h1>" + cartCount + "</br>" + "$" + cartAmount.toFixed(2);
+
+            let cartContainer = document.getElementById('cart-container');
+            if (!cartContainer) {
+                cartContainer = document.createElement('div');
+                cartContainer.id = 'cart-container';
+                document.body.appendChild(cartContainer);
+            } else {
+                cartContainer.innerHTML = ''; // Clear the content of the cart-container div
+            }
+
+            cart.forEach((cartItem, index) => {
+                let item = cartItem.item;
+
+                let cartItemDiv = document.createElement('div');
+                cartItemDiv.className = 'cart-item';
+
+                let itemImage = document.createElement('img');
+                itemImage.src = 'sampleImage.jpeg';
+                itemImage.alt = 'Sample image';
+                itemImage.className = 'item-image';
+                cartItemDiv.appendChild(itemImage);
+
+                let itemInfo = document.createElement('div');
+                itemInfo.className = 'item-info';
+                itemInfo.innerHTML = '<b>' + item.price + '</b></br>' + item.description + '</br>' + item.rating + '</br>Quantity: ' + cartItem.quantity;
+                cartItemDiv.appendChild(itemInfo);
+
+                let removeButton = document.createElement('input');
+                removeButton.type = 'button';
+                removeButton.value = 'Remove';
+                removeButton.className = 'remove-button';
+                removeButton.onclick = function () { removeFromCart(index) };
+                cartItemDiv.appendChild(removeButton);
+
+                cartContainer.appendChild(cartItemDiv);
+            });
+
+            if (cart.length > 0) {
+                let checkoutButton = document.createElement('input');
+                checkoutButton.type = 'button';
+                checkoutButton.value = 'Proceed to Checkout';
+                checkoutButton.className = 'checkout-button';
+                checkoutButton.onclick = function () { alert('Proceeding to checkout...') };
+                cartContainer.appendChild(checkoutButton);
+            }
+        }
+
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItem = cart[index];
+
+            if (cartItem.quantity > 1) {
+                cartItem.quantity -= 1;
+            } else {
+                cart.splice(index, 1);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }
+
+        displayCartItems();
+    </script>
+</body>
+
+</html>
