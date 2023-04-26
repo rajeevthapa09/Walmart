@@ -16,14 +16,14 @@
 
     <header class="header">
         <div class="header-div" id="walmart-div">
-            <h1>Walmart</h1><img src="walmart_blue.jpg" alt="Walmart Logo">
+            <h1>Walmart</h1><img src="image/walmart_blue.jpg" alt="Walmart Logo">
         </div>
         <div class="header-div" id="departments-div">
-            <img src="departments.jpg" alt="Departments Icon" style="height: 20px;">
+            <img src="image/departments.jpg" alt="Departments Icon" style="height: 20px;">
             Departments
         </div>
         <div class="header-div" id="services-div">
-            <img src="services.jpg" alt="Services Icon" style="height: 20px;">
+            <img src="image/services.jpg" alt="Services Icon" style="height: 20px;">
             Services
         </div>
         <input type="text" class="search-bar" placeholder="Search">
@@ -75,18 +75,29 @@
         <label id="lft-top-label-count"></label>
         <div id="cart-container"></div>
     </div>
-    <div class="right-body-div" id="right-body-div">
+    <div class="right-body-div" id="right-body-div" >
         <input type="button" value="Continue to checkout" class="checkout-top-button">
 
         <p style="font-size: smaller; color: grey;">For best shopping experience, sign-in</p>
         <hr class="gray-line">
-        <div class="subtotal-div" id="subtotal-div">
+        <div class="subtotal-div" id="subtotal-div" >
 
-            <p>Items in cart: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <span
-                    id="cart-count-display"></span></p>
-            <p><b>Subtotal</b> (<span id="cart-count-parenthesis"></span>):&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                &nbsp &nbsp $ <span id="cart-amount-display"></span></p>
 
+            <div class="subtotal-grid-container">
+                <div class="subtotal-grid-item">
+                    <p><b>Subtotal</b> (<span id="cart-count-parenthesis"></span>): <span id="cart-count-display"></p>
+                </div>
+                <div class="subtotal-grid-item">
+                    <p>$<span id="cart-amount-display"></span></p>
+
+                </div>
+                <div class="subtotal-grid-item">Shipping:</div>
+                <div class="subtotal-grid-item">Free</div>
+                <div class="subtotal-grid-item">Taxes</div>
+                <div class="subtotal-grid-item">Calculated at checkout</div>
+
+            </div>
+            <img src = "/image/cartRightCorner.png" alt="cart bottom" style="width: 100%;">
         </div>
     </div>
 
@@ -96,7 +107,6 @@
         function updateCartDisplay() {
             let cartButton = document.getElementById("cart-button");
             cartButton.innerHTML = "<h1>🛒 </h1>" + cartCount + "</br>" + "$" + cartAmount.toFixed(2);
-            document.getElementById("cart-count-display").innerHTML = cartCount;
             document.getElementById("cart-amount-display").innerHTML = cartAmount.toFixed(2);
             document.getElementById("cart-count-parenthesis").innerHTML = cartCount;
             document.getElementById("numberOfItems").innerHTML = cartCount;
@@ -104,7 +114,7 @@
 
         function removeFromCart(index) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let itemPrice = parseFloat(cart[index].price.replace('$', ''));
+            let itemPrice = cart[index].price;
             cartCount -= 1;
             cartAmount -= itemPrice;
             updateCartDisplay();
@@ -115,14 +125,14 @@
         }
 
         function displayCartItems() {
-            let cartPageHeading = document.createElement("p");
-            cartPageHeading.innerHTML = 'Cart (' + cartCount + ')';
-            document.body.append(cartPageHeading);
+            // let cartPageHeading = document.createElement("p");
+            // cartPageHeading.innerHTML = 'Cart (' + cartCount + ')';
+            // document.body.append(cartPageHeading);
 
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cartCount = cart.length;
             cartAmount = 0;
-            cart.forEach(item => cartAmount += parseFloat(item.price.replace('$', '')));
+            cart.forEach(item => cartAmount += item.price);
             updateCartDisplay();
 
             let cartContainer = document.getElementById('cart-container');
@@ -133,7 +143,7 @@
                 cartItem.className = 'cart-item';
 
                 let itemImage = document.createElement('img');
-                itemImage.src = item.imageSrc;
+                itemImage.src = item.image;
                 itemImage.alt = item.description;
                 itemImage.className = 'item-image';
                 cartItem.appendChild(itemImage);
@@ -166,6 +176,12 @@
 
 
         displayCartItems();
+
+        let cartFooter = document.createElement("img");
+        cartFooter.src = "image/CartFooter.png";
+        cartFooter.style = "width: 100%";
+        
+        document.body.append(cartFooter);
     </script>
 </body>
 

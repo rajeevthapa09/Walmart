@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:sans-serif;
+    font-family: sans-serif;
 }
 
 body {
@@ -21,6 +21,7 @@ body {
 
 .header {
     height: 100px;
+   
 }
 
 .second-header {
@@ -40,6 +41,7 @@ body {
     padding: 10px 20px;
     border-radius: 50px;
     transition: background-color 0.3s ease;
+
 }
 
 .second-header-div {
@@ -62,7 +64,7 @@ body {
 }
 
 .header-div:hover {
-    background-color: rgb(15, 93, 172);
+    background-color: darkblue;
 }
 
 .search-bar {
@@ -74,7 +76,8 @@ body {
     margin-left: 20px;
     margin-right: 20px;
 }
-.search-button{
+
+.search-button {
     border: none;
     text-align: center;
     height: 25px;
@@ -83,31 +86,36 @@ body {
     border-radius: 50%;
     margin-left: -50px;
 }
+
 .display-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
     padding: 20px;
-  }  
+}
 
 .image-container {
     width: 250px;
     padding-left: 10px;
 }
-.item-image{
+
+.item-image {
     height: 250px;
 
 }
+
 .image-div {
 
     margin-bottom: 10px;
 }
+
 .button-container {
     margin-bottom: 10px;
 }
-.addButton{
 
-    background-color: rgb(27, 99, 207);
+.addButton {
+
+    background-color: rgb(25, 115, 200);
     border: none;
     cursor: pointer;
     color: white;
@@ -115,4 +123,98 @@ body {
     padding: 10px 20px;
     border-radius: 50px;
     transition: background-color 0.3s ease;
+}
+
+.addButton:hover {
+    background-color: darkblue;
+}
+
+.left-body-div {
+    width: 30%;
+    float: left;
+    margin: 10px;
+}
+
+.right-body-div {
+    margin-top: 05px;
+    padding: 5px;
+    border-style: outset;
+    align-items: center;
+    width: 30%;
+    float: right;
+    margin: 10px;
+}
+
+.checkout-top-button {
+    background-color: rgb(25, 115, 200);
+    width: 80%;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+    margin: 15px;
+
+}
+
+.gray-line {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.subtotal-div {
+    margin-top: 10px;
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+}
+
+.right-column {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-gap: 10px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.header-container {
+    position: fixed;
+    top: 0;
+    width: 100%
+}
+
+.cart-top-caption {
+    float: left;
+    margin: 15px;
+}
+
+.footerImage {
+    width: 100%;
+}
+
+.subtotal-grid-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.subtotal-grid-item {
+
+    padding: 5px;
+
+    text-align: center;
 }

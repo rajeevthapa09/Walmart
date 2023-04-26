@@ -77,7 +77,7 @@
 <body>
     <div class="container">
         <div style="text-align: center;">
-            <img src="logo.svg.svg" alt="Logo" id="logo" height="60px" />
+            <img src="image/yello ring logo.svg" alt="Logo" id="logo" height="60px" />
             <h3>Sign in or<br />create your account</h3>
             <p>Not sure if you have an account?<br />Enter your email address and we'll check for you.</p>
             <div id="email-section" style="display: contents;">
@@ -119,25 +119,25 @@
         let passwordSection = document.getElementById("password-section");
         let emailSection = document.getElementById("email-section");
         let emailValue = document.getElementById("email").value;
-        
-        if(emailValue){
-        emailSection.style = "display:none";
-        passwordSection.style = "display:contents";
+
+        if (emailValue) {
+            emailSection.style = "display:none";
+            passwordSection.style = "display:contents";
         }
     }
     function login() {
         var email = document.getElementById("email").value;
         let passwordValue = document.getElementById("password");
-        if(passwordValue){
-        if (email === "manager@gmail.com") {
-          window.location.href = "manager.html";
-        } else {
-          window.location.href = "customer.html";
+        if (passwordValue) {
+            if (email == "manager@gmail.com") {
+                window.location.href = "inventoryWalmart.html";
+            } else {
+                window.location.href = "mainPage.html";
+            }
         }
-      }
     }
 
-    
+
 </script>
 
 </html>

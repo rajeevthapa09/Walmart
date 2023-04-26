@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage</title>
+    <link href="StyleSheet.css" rel="styleSheet">
+
+
+
+</head>
+
+<body>
+    <script src="createStorage.js"></script>
+    <script>
+        let cartCount = 0;
+        let cartAmount = 0;
+    </script>
+    <div class="header-container">
+        <header class="header">
+            <div class="header-div" id="walmart-div">
+                <h1>Walmart</h1><img src="image/walmart_blue.jpg" alt="Walmart Logo">
+            </div>
+            <div class="header-div" id="departments-div">
+                <img src="image/departments.jpg" alt="Departments Icon" style="height: 20px;">
+                Departments
+            </div>
+            <div class="header-div" id="services-div">
+                <img src="image/services.jpg" alt="Services Icon" style="height: 20px;">
+                Services
+            </div>
+            <input type="text" class="search-bar" placeholder="Search">
+            <input class="search-button" type="button" value="🔍︎">
+            <div class="header-div" id="right-button1-div">
+                <div class="grid-container">
+                    <div class="center">
+                        <p style="font-size: large;">♡</p>
+                    </div>
+                    <div class="right-column">
+                        <div>
+                            <p style="font-size:x-small;">Recorder</p>
+                        </div>
+                        <div>
+                            <h5>My&nbspItems</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-div" id="right-button2-div">
+
+                <div class="grid-container">
+                    <div class="center">
+                        <p style="font-size: large;">👤</p>
+                    </div>
+                    <div class="right-column">
+                        <div>
+                            <p style="font-size:x-small;">SignIn</p>
+                        </div>
+                        <div>
+                            <h5>Account</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-div" id="cart-button" onClick="location.href='cart.html'">
+                <h1>🛒 </h1> 0 </br>
+            </div>
+        </header>
+        <div class="second-header">
+            <div class="second-header-div"><b>How do you want your item?</b></div>
+            <div class="second-header-div">Fairfield, 52557 Fairfield Supercenter</div>
+            <div class="second-header-div">Flash picks</div>
+            <div class="second-header-div">Mother's day</div>
+            <div class="second-header-div">Grocery & essentials</div>
+            <div class="second-header-div">Fashion</div>
+            <div class="second-header-div">Home</div>
+            <div class="second-header-div">Tech</div>
+            <div class="second-header-div">Auto</div>
+            <div class="second-header-div">Registry</div>
+        </div>
+    </div>
+
+    <div class="screenshot1" id="screenshot1" style="margin-top: 0px;">
+        <img src="image/walmartScreen1.png" width="100%">
+    </div>
+    <div class="screenshot2" id="screenshot2">
+        <img src="image/walmartScreen2.png" width="100%">
+    </div>
+
+    <!-- Buttons and select for filtering and sorting  -->
+
+    <button id="sort-by-price" onclick="sortBy('price')">Price lowest first</button>
+    <button id="sort-by-price" onclick="sortBy('price', true)">Price highest first</button>
+    <button id="sort-by-price" onclick="sortBy('rating', true)">Sort By Rating</button>
+
+    <!-- We have created function detectChange() which is called on change of select. -->
+    <label for="department"> Department: </label>
+    <select name="department" id="department" onchange="detectChangeOfDept()">
+        <option value=""></option>
+        <option value="Technology">Technology</option>
+        <option value="Business">Business</option>
+
+    </select>
+
+    <label for="Brand"> Brand: </label>
+    <select name="brand" id="brand" onchange="detectChangeOfBrand()">
+        <option value=""></option>
+        <option value="Apple">Apple</option>
+        <option value="Microsoft">Microsoft</option>
+
+    </select>
+
+
+    <div id="items-list" class="display-container"></div>
+
+    <script>
+        let sort = { key: '', isReverse: false };
+        let filter = {
+            'department': '',
+            'brand': ''
+        }
+
+        let items = JSON.parse(localStorage.getItem("items"));
+        window.onload = displayItems;
+
+
+
+
+
+
+        // // to test
+        // console.log("Selected Department: " + selectedDepartment);
+        // console.log("Selected Brand: " + selectedBrand);
+
+        //DetectChange() functions 
+
+        function detectChangeOfBrand() {
+
+            // getting the selected brand value
+            let brandSelect = document.getElementById("brand");
+            let selectedBrand = brandSelect.value;
+
+            filterBy("brand", selectedBrand);
+
+        }
+        function detectChangeOfDept() {
+
+            // getting  selected department value
+            let departmentSelect = document.getElementById("department");
+            let selectedDepartment = departmentSelect.value;
+
+            console.log("dep: ", selectedDepartment);
+            filterBy("department", selectedDepartment);
+        }
+
+        // add filter event listener
+        function filterBy(key, value) {
+            filter[key] = value;
+
+            updateItemsList();
+        }
+
+        function sortBy(key, isReverse = false) {
+            // isReverse is not compulsory, is false by default
+            // if false, sorts in ascending order
+
+            // when you have to sort something in reverse order, 
+            // for ex. rating, pass isReverse = true where the function is called
+            sort.key = key;
+            sort.isReverse = isReverse;
+
+            updateItemsList();
+        }
+
+        function updateItemsList() {
+            let allItems = JSON.parse(localStorage.getItem("items"));
+
+            items = allItems.sort((a, b) => {
+                if (sort.isReverse)
+                    return a[sort.key] > b[sort.key] ? -1 : 1;
+
+                return a[sort.key] < b[sort.key] ? -1 : 1;
+            });
+
+            if (filter.department)
+                items = items.filter(item => item.department === filter.department);
+
+            if (filter.brand)
+                items = items.filter(item => item.brand === filter.brand);
+
+            displayItems();
+        }
+
+        // Create display-container divs
+
+        function displayItems() {
+            const displayContainer = document.getElementById('items-list');
+            displayContainer.innerHTML = "";
+
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+
+                // Create image-container div
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'image-container';
+                imageContainer.id = 'image-container-' + i;
+
+                // Create image-div div
+                const imageDiv = document.createElement('div');
+                imageDiv.className = 'image-div';
+                imageDiv.id = 'image-div-' + i;
+
+                // Create item-image img
+                const itemImage = document.createElement("img");
+                itemImage.className = "item-image";
+                itemImage.src = item.image;
+                itemImage.alt = "Sample image";
+
+                // Append item-image to image-div
+                imageDiv.appendChild(itemImage);
+
+                // Create button-container div
+                const buttonContainer = document.createElement('div');
+                buttonContainer.className = 'button-container';
+                buttonContainer.id = 'button-container-' + i;
+
+                // Create add button
+                const addButton = document.createElement('input');
+                addButton.type = 'button';
+                addButton.value = '+ Add';
+                addButton.id = 'add-button-' + i;
+                addButton.onclick = function () { addToCart(i) }; // Update this line
+                addButton.setAttribute('class', 'addButton');
+
+                // Append add button to button-container
+                buttonContainer.appendChild(addButton);
+
+                // Create item-textbox div
+                const itemTextbox = document.createElement('div');
+                itemTextbox.className = 'item-textbox';
+                itemTextbox.id = 'item-textbox-' + i;
+
+                // Create item description paragraph
+                const itemDescription = document.createElement('p');
+                itemDescription.innerHTML = '<b>' + '$' + item.price + '</b></br>' + item.description + '</br>' + '⭐'.repeat(item.rating);
+
+                // Append item description to item-textbox
+                itemTextbox.appendChild(itemDescription);
+
+                // Append image-div, button-container, and item-textbox to image-container
+                imageContainer.appendChild(imageDiv);
+                imageContainer.appendChild(buttonContainer);
+                imageContainer.appendChild(itemTextbox);
+
+                // Append image-container to body
+                displayContainer.appendChild(imageContainer);
+            }
+        }
+
+        function addToCart(index) {
+            cartCount += 1;
+            let itemPrice = items[index].price;
+            cartAmount += itemPrice;
+            console.log(`Cart count: ${cartCount}, Cart amount: $${cartAmount.toFixed(2)}`);
+
+
+            let storedItems = localStorage.getItem("cart");
+            // returns string if it is set before
+            // by calling localStorage.setItem("cart", "value");
+
+            // Add item to cart in localStorage
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push({
+                price: items[index].price,
+                description: items[index].description,
+                rating: items[index].rating,
+                image: items[index].image,
+            });
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            // Update cart count and amount in the header
+            let cartButton = document.getElementById("cart-button");
+            cartButton.innerHTML = "<h1>🛒 </h1>" + cartCount + "</br>" + "$" + cartAmount.toFixed(2);
+        }
+
+
+
+        //Put footer screenshots. 
+        const footerImage1 = document.createElement('img');
+        footerImage1.src = 'image/walmartScreen3.png';
+        footerImage1.className = "footerImage";
+        document.body.appendChild(footerImage1);
+
+        const footerImage2 = document.createElement('img');
+        footerImage2.src = 'image/walmartScreen4.png';
+        footerImage2.className = "footerImage";
+        document.body.appendChild(footerImage2);
+
+    </script>
+</body>
+
+</html>
