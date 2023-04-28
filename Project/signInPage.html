@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Page</title>
+    <style>
+        /* Center the content */
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        /* Style the container */
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 85%;
+        }
+
+        /* Style the footer */
+        .footer {
+            border-top: 1px solid gray;
+            font-size: 10px;
+            text-align: center;
+            padding: 10px;
+            height: 15%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .footer label {
+            color: black;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        /* Style the text field and button */
+        input[type="email"],
+        input[type="password"] {
+            background-color: lightblue;
+            padding: 10px;
+            width: 100%;
+            border: none;
+        }
+
+        button {
+            background-color: blue;
+            border-radius: 10px;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        /* Style the underlined text */
+        .underline {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div style="text-align: center;">
+            <img src="image/yello ring logo.svg" alt="Logo" id="logo" height="60px" />
+            <h3>Sign in or<br />create your account</h3>
+            <p>Not sure if you have an account?<br />Enter your email address and we'll check for you.</p>
+            <div id="email-section" style="display: contents;">
+                <div style="text-align: left;">
+                    <label for="email">Email Address</label><br />
+                    <input type="email" id="email" name="email" />
+                </div>
+                <br />
+                <button onclick="displayPassword()">Continue</button>
+                <br />
+            </div>
+            <div id="password-section" style="display:none">
+                <div style="text-align: left;">
+                    <label for="password">Password</label><br />
+                    <input type="password" id="password" name="password" />
+                </div>
+                <br />
+                <button onclick="login()">Log in</button>
+            </div>
+            <br />
+            <p>Securing your personal information is our priority.</p>
+            <p> See our privacy measures.</p>
+        </div>
+    </div>
+    <footer class="footer">
+        <div>&copy; 2023 Walmart. All Rights Reserved.</div>
+        <div>
+            <label>Give feedback</label>
+            <label><img src="privacyChoice.png" alt="Privacy Choice" height="10px" />Privacy Choice Your Privacy
+                Choices</label>
+            <label>Request my personal information</label>
+            <label>California Supply Chain Act 2023</label>
+        </div>
+    </footer>
+
+</body>
+<script>
+    function displayPassword() {
+        let passwordSection = document.getElementById("password-section");
+        let emailSection = document.getElementById("email-section");
+        let emailValue = document.getElementById("email").value;
+
+        if (emailValue) {
+            emailSection.style = "display:none";
+            passwordSection.style = "display:contents";
+        }
+    }
+    function login() {
+        var email = document.getElementById("email").value;
+        let passwordValue = document.getElementById("password");
+        if (passwordValue) {
+            if (email == "manager@gmail.com") {
+                window.location.href = "inventoryWalmart.html";
+            } else {
+                window.location.href = "mainPage.html";
+            }
+        }
+    }
+
+
+</script>
+
+</html>

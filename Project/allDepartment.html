@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style/walmart.css"> -->
+</head>
+
+<body>
+
+    <div id="allFiltersTop">
+        <div><img src="image/allFilter-icon.svg"></div>
+        <div id="allFiltersText">All filters</div>
+        <div></div>
+        <div><img class="cancelAllFilters" src="image/cancel-icon.svg" onclick="closeAllFilters()"></div>
+    </div>
+    <div id="allFiltersContainer">
+        <div class="filter-AllFilters">
+            <div id="deptFilter" onclick="deptFilter()">
+                <div class="allFiltersLeft">Departments</div>
+                <div class="allFiltersRight"><img class="hor-filter-icon" id="deptChevron"
+                        src="image/chevron-down-icon.svg"></div>
+            </div>
+            <div id="department_AllFilters">
+                <div id="allDepartmentsRadio">
+                    <div><input type="radio" name="allDepartments" checked></div>
+                    <div>All departments</div>
+                </div>
+                <div id="allDeptFlex">
+                    <div class="allDeptGrid">
+                        <div><input type="radio" name="allDepartmentsFilter" value="Apparel"></div>
+                        <div>Apparel</div>
+                        <div>2</div>
+                    </div>
+                    <div class="allDeptGrid">
+                        <div><input type="radio" name="allDepartmentsFilter" value="Clothing"></div>
+                        <div>Clothing</div>
+                        <div>6</div>
+                    </div>
+                    <div class="allDeptGrid">
+                        <div><input type="radio" name="allDepartmentsFilter" value="Fashion"></div>
+                        <div>Fashion</div>
+                        <div>3</div>
+                    </div>
+                    <div class="allDeptGrid">
+                        <div><input type="radio" name="allDepartmentsFilter" value="Jewelry"></div>
+                        <div>Jewelry</div>
+                        <div>2</div>
+                    </div>
+                    <div class="allDeptGrid">
+                        <div><input type="radio" name="allDepartmentsFilter" value="Watches"></div>
+                        <div>Watches</div>
+                        <div>4</div>
+                    </div>
+                    <div class="allDeptGrid">
+                        <div><input type="radio" name="allDepartmentsFilter" value="Women Purses"></div>
+                        <div>Women Purses</div>
+                        <div>3</div>
+                    </div>
+                </div>
+                <div id="showMore"><a href="">Show More</a></div>
+            </div>
+        </div>
+        <div class="filter-AllFilters">
+            <div class="allFiltersLeft">Availability</div>
+            <div class="allFiltersRight"><img class="hor-filter-icon" src="image/chevron-down-icon.svg"></div>
+        </div>
+        <div class="filter-AllFilters">
+            <div class="allFiltersLeft">Special Offers</div>
+            <div class="allFiltersRight"><img class="hor-filter-icon" src="image/chevron-down-icon.svg"></div>
+        </div>
+        <div class="filter-AllFilters">
+            <div id="ratingDisp" onclick="filterRating()">
+                <div class="allFiltersLeft">Customer Rating</div>
+                <div class="allFiltersRight"><img class="hor-filter-icon" id="ratingChevron"
+                        src="image/chevron-down-icon.svg"></div>
+            </div>
+            <div id="ratingFlex">
+                <div class="ratingGrid">
+                    <div><input type="radio" name="ratingRadio" value="4"></div>
+                    <div>★★★★ & above</div>
+                    <div>4</div>
+                </div>
+                <div class="ratingGrid">
+                    <div><input type="radio" name="ratingRadio" value="3"></div>
+                    <div>★★★ & above</div>
+                    <div>4</div>
+                </div>
+                <div class="ratingGrid">
+                    <div><input type="radio" name="ratingRadio" value="2"></div>
+                    <div>★★ & above</div>
+                    <div>12</div>
+                </div>
+                <div class="ratingGrid">
+                    <div><input type="radio" name="ratingRadio" value="1"></div>
+                    <div>★ & above</div>
+                    <div>20</div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-AllFilters">
+            <div class="allFiltersLeft">Retailer</div>
+            <div class="allFiltersRight"><img class="hor-filter-icon" src="image/chevron-down-icon.svg"></div>
+        </div>
+        <div class="filter-AllFilters">
+            <div class="allFiltersLeft">Gifting</div>
+            <div class="allFiltersRight"><img class="hor-filter-icon" src="image/chevron-down-icon.svg"></div>
+        </div>
+    </div>
+    <div id="viewResultsAllFilters" onclick="filterByDept()">
+        View results
+    </div>
+
+</body>
+
+</html>
