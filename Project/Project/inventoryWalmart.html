@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="createStorage.js"></script>
+
+    <script>
+        //get data from local storage for initialization. Data stored in local storage using createStorage.js
+
+        let form = JSON.parse(localStorage.getItem("items"));  
+
+        let createTable;
+        let containerDiv;
+        window.onload = function () {
+            containerDiv = document.createElement("div");
+            document.body.append(containerDiv);
+            containerDiv.setAttribute("id", "container");
+
+            let header = document.createElement("h3");
+            containerDiv.append(header);
+            header.innerHTML = "Inventory";
+
+            let labelItem = document.createElement("label");
+            containerDiv.append(labelItem);
+            labelItem.innerHTML = "Department:<br>";
+
+            let inputItem = document.createElement("input");
+            inputItem.setAttribute("type", "text");
+            inputItem.setAttribute("id", "department");
+            containerDiv.append(inputItem);
+
+            let labelCategory = document.createElement("label");
+            containerDiv.append(labelCategory);
+            labelCategory.innerHTML = "<br>Item Description:<br>";
+
+            let categoryInput = document.createElement("input");
+            categoryInput.setAttribute("type", "text");
+            categoryInput.setAttribute("id", "itemDescription");
+            containerDiv.append(categoryInput);
+
+            let quantityLabel = document.createElement("label");
+            containerDiv.append(quantityLabel);
+            quantityLabel.innerHTML = "<br>Brand:<br>";
+
+            let quantityInput = document.createElement("input");
+            quantityInput.setAttribute("type", "text");
+            quantityInput.setAttribute("id", "itemBrand");
+            containerDiv.append(quantityInput);
+
+            let priceLabel = document.createElement("label");
+            priceLabel.innerHTML = "<br>Price:<br>"
+            containerDiv.append(priceLabel);
+
+            let priceInput = document.createElement("input");
+            priceInput.setAttribute("type", "text");
+            priceInput.setAttribute("id", "itemPrice");
+            containerDiv.append(priceInput);
+
+            let imageLabel = document.createElement("label");
+            imageLabel.innerHTML = "<br>Image Location:<br>"
+            containerDiv.append(imageLabel);
+
+            let imageInput = document.createElement("input");
+            imageInput.setAttribute("type", "text");
+            imageInput.setAttribute("id", "image");
+            containerDiv.append(imageInput);
+
+            let ratingLabel = document.createElement("label");
+            ratingLabel.innerHTML = "<br>Rating:<br>"
+            containerDiv.append(ratingLabel);
+
+            let ratingInput = document.createElement("input");
+            ratingInput.setAttribute("type", "text");
+            ratingInput.setAttribute("id", "itemRating");
+            containerDiv.append(ratingInput);
+
+            let breaker = document.createElement("br");
+            containerDiv.append(breaker);
+
+            let addButton = document.createElement("button");
+            addButton.innerHTML = "Add"
+            addButton.setAttribute("onclick", "add()")
+            containerDiv.append(addButton);
+
+
+            //createFilter
+            // let filterInput = document.createElement("div");
+            // filterInput.setAttribute("style", "margin-top: 15px; margin-bottom: 15px")
+            // containerDiv.append(filterInput);
+            // filterInput.innerHTML = "<label>Filter By:</label><select name='selectFilter'><option value='name'>Name equals</option>" +
+            //     "<option value='category'>Category</option><option value='price'>Price greater than</option><option value='quantity'>Quantity greater than</option>"
+            //     + "<option value='rating'>Rating greater than</option></select><input id='filterInput1' type='text' /><button onclick='filter()'>Submit</button><button onclick='reset()'>Reset</button>";
+
+            //create sort
+            let sort = document.createElement("div");
+            sort.setAttribute("style", "margin-bottom:15px; margin-top:25px");
+            containerDiv.append(sort);
+            sort.innerHTML = "<label>Sort By:</label><select name='sortSelect'><option>Name</option><option>Price</option></select>" +
+                "<button onclick=sortNow()>Submit</button>";
+
+            //create Table
+            let divTable = document.createElement("div");
+            containerDiv.append(divTable);
+            createTable = document.createElement("table");
+            createTable.setAttribute("id", "table");
+            divTable.append(createTable);
+            let tr;
+
+
+            for (const obj of form) {
+                if (form.indexOf(obj) == 0) {
+                    let tr1 = document.createElement("tr");
+                    let th1 = document.createElement("th");
+                    let th2 = document.createElement("th");
+                    let th3 = document.createElement("th");
+                    let th4 = document.createElement("th");
+                    let th5 = document.createElement("th");
+                    let th6 = document.createElement("th");
+                    th1.innerHTML = "Deparment";
+                    th2.innerHTML = "Description";
+                    th3.innerHTML = "Brand";
+                    th4.innerHTML = "Price";
+                    th5.innerHTML = "Rating";
+                    th6.innerHTML = "Image Location";
+                    th1.setAttribute("style", "font-weight:700;");
+                    th2.setAttribute("style", "font-weight:700;");
+                    th3.setAttribute("style", "font-weight:700;");
+                    th4.setAttribute("style", "font-weight:700;");
+                    th5.setAttribute("style", "font-weight:700;");
+                    th6.setAttribute("style", "font-weight:700;");
+                    tr1.append(th1);
+                    tr1.append(th2);
+                    tr1.append(th3);
+                    tr1.append(th4);
+                    tr1.append(th5);
+                    tr1.append(th6);
+                    createTable.append(tr1);
+                }
+                let td1 = document.createElement("td");
+                td1.innerHTML = obj.department;
+                let td2 = document.createElement("td");
+                td2.innerHTML = obj.description;
+                let td3 = document.createElement("td");
+                td3.innerHTML = obj.brand;
+                let td4 = document.createElement("td");
+                td4.innerHTML = obj.price;
+                let td5 = document.createElement("td");
+                td5.innerHTML = obj.rating;
+                let td6 = document.createElement("td");
+                td6.innerHTML = obj.image;
+                let td7 = document.createElement("td");
+                let deleteButton = document.createElement("button");
+                deleteButton.setAttribute("onclick", "deleteRow(this)")
+                let editButton = document.createElement("button");
+                deleteButton.innerHTML = "Delete";
+                editButton.innerHTML = "Edit";
+                editButton.setAttribute("onclick", "editRow(this)");
+                td7.append(editButton);
+                let td8 = document.createElement("td");
+                td8.append(deleteButton);
+
+                tr = document.createElement("tr");
+                tr.append(td1);
+                tr.append(td2);
+                tr.append(td3);
+                tr.append(td4);
+                tr.append(td5);
+                tr.append(td6);
+                tr.append(td7);
+                tr.append(td8);
+                createTable.append(tr);
+            }
+
+        }
+
+        function reset() {
+            window.location.reload();
+        }
+
+        let check = 'add';
+        function add() {
+            let check = true;
+            let department = document.getElementById("department").value;
+            let description = document.getElementById("itemDescription").value;
+            let brand = document.getElementById("itemBrand").value;
+            let price = document.getElementById("itemPrice").value;
+            let rating = document.getElementById("itemRating").value;
+            let image = document.getElementById("image").value;
+
+
+            if (department == "" || description == "" || brand == "" || price == "" || rating == "" || image == "") {
+                alert("Field cannot be empty");
+
+            } else if (isNaN(price)) {
+                alert("Price is not a number");
+                document.getElementById("itemPrice").setAttribute("style", "border: 2px solid red;")
+
+            }
+
+            for (const obj of form) {
+                if (obj.description === description) {
+                    obj.department = department;
+                    obj.description = description;
+                    obj.price = price;
+                    obj.brand = brand;
+                    obj.rating = rating;
+                    obj.image = image;
+                    check = false;
+                }
+            }
+            console.log("outside check", check);
+            if (check) {
+                console.log(check);
+                form.push({ department: department, description: description, brand: brand, price: price, rating: rating, image: image });
+
+            }
+            buildTable();
+
+            localStorage.setItem("items", JSON.stringify(form));
+
+        }
+
+
+        function deleteRow(rx) {
+            form.splice(rx.parentNode.parentNode.rowIndex - 1, 1);
+            buildTable();
+        }
+
+        function buildTable() {
+            createTable.innerHTML = "";
+            let tr;
+            for (const obj of form) {
+                if ((form.indexOf(obj) == 0) || (form.indexOf(obj) == null)) {
+                    let tr1 = document.createElement("tr");
+                    let th1 = document.createElement("th");
+                    let th2 = document.createElement("th");
+                    let th3 = document.createElement("th");
+                    let th4 = document.createElement("th");
+                    let th5 = document.createElement("th");
+                    let th6 = document.createElement("th");
+                    th1.innerHTML = "Deparment";
+                    th2.innerHTML = "Description";
+                    th3.innerHTML = "Brand";
+                    th4.innerHTML = "Price";
+                    th5.innerHTML = "Rating";
+                    th6.innerHTML = "Image Location";
+                    th1.setAttribute("style", "font-weight:700;");
+                    th2.setAttribute("style", "font-weight:700;");
+                    th3.setAttribute("style", "font-weight:700;");
+                    th4.setAttribute("style", "font-weight:700;");
+                    th5.setAttribute("style", "font-weight:700;");
+                    th6.setAttribute("style", "font-weight:700;");
+                    tr1.append(th1);
+                    tr1.append(th2);
+                    tr1.append(th3);
+                    tr1.append(th4);
+                    tr1.append(th5);
+                    tr1.append(th6);
+                    createTable.append(tr1);
+                }
+                let td1 = document.createElement("td");
+                td1.innerHTML = obj.department;
+                let td2 = document.createElement("td");
+                td2.innerHTML = obj.description;
+                let td3 = document.createElement("td");
+                td3.innerHTML = obj.brand;
+                let td4 = document.createElement("td");
+                td4.innerHTML = obj.price;
+                let td5 = document.createElement("td");
+                td5.innerHTML = obj.rating;
+                let td6 = document.createElement("td");
+                td6.innerHTML = obj.image;
+                let td7 = document.createElement("td");
+                let deleteButton = document.createElement("button");
+                deleteButton.setAttribute("onclick", "deleteRow(this)")
+                let editButton = document.createElement("button");
+                deleteButton.innerHTML = "Delete";
+                editButton.innerHTML = "Edit";
+                editButton.setAttribute("onclick", "editRow(this)");
+                td7.append(editButton);
+                let td8 = document.createElement("td");
+                td8.append(deleteButton);
+
+                tr = document.createElement("tr");
+                tr.append(td1);
+                tr.append(td2);
+                tr.append(td3);
+                tr.append(td4);
+                tr.append(td5);
+                tr.append(td6);
+                tr.append(td7);
+                tr.append(td8);
+                createTable.append(tr);
+            }
+        }
+
+        function editRow(rx) {
+            check = "edit";
+            // console.log(rx);
+            let rowIndex = rx.parentNode.parentNode.rowIndex - 1;
+            document.getElementById("department").value = form[rowIndex].department;
+            document.getElementById("itemDescription").value = form[rowIndex].description;
+            document.getElementById("itemBrand").value = form[rowIndex].brand;
+            document.getElementById("itemPrice").value = form[rowIndex].price;
+            document.getElementById("itemRating").value = form[rowIndex].rating;
+            document.getElementById("image").value = form[rowIndex].image;
+            // form.push({ name: name, category: category, quantity: quantity, price: price, rating: rating });
+            buildTable();
+        }
+
+        function filter() {
+            let filterVal = document.getElementById("filterInput1").value;
+            let queryFilter = document.querySelector("select[name='selectFilter'] option:checked");
+            if (queryFilter.value === "department") {
+                form = form.filter(item => item.department === filterVal);
+            } else if (queryFilter.value === "description") {
+                form = form.filter(item => item.description === filterVal);
+
+            } else if (queryFilter.value === "price") {
+                form = form.filter(item => item.price > parseInt(filterVal));
+
+            } else if (queryFilter.value === "rating") {
+                form = form.filter(item => item.rating > parseInt(filterVal));
+
+            } else if (queryFilter.value === "brand") {
+                form = form.filter(item => item.brand === filterVal);
+
+            }
+            buildTable();
+        }
+
+        function sortNow() {
+            console.log("sorting");
+            createTable.innerHTML = "";
+            let tr;
+            let querySelectSort = document.querySelector("select[name='sortSelect'] option:checked");
+            //console.log(querySelectSort.innerHTML);
+            if (querySelectSort.innerHTML === "Name") {
+                form = form.sort((a, b) => (a.department > b.department) ? 1 : ((b.department > a.department) ? -1 : 0));
+            } else {
+                form = form.sort((a, b) => a.price - b.price);
+            }
+            buildTable();
+        }
+    </script>
+    <style>
+        tr:hover {
+            background-color: lightgray !important;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: lightblue;
+        }
+
+        input {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+</body>
+
+</html>

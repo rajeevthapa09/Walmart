@@ -1,0 +1,335 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.hor-filter {
+    width: 110px;
+    height: 35px;
+    border-radius: 9999px;
+    display: flex;
+    background-color: #f1f1f2;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+#filterContainer {
+    display: flex;
+    gap: 10px;
+    float: left;
+}
+
+.hor-filter-icon {
+    width: 17px;
+    height: 17px;
+}
+
+.iconFilter {
+    margin-top: 0px;
+
+}
+
+#brandContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.brandCheckBox {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    text-align: left;
+}
+
+.hor-filter-icon {
+    width: 17px;
+    height: 17px;
+}
+
+.filterText {
+    font-size: 14px;
+    font-family: Helvetica, Arial, Helvetica, sans-serif;
+}
+
+#searchBrand {
+    border: 1px solid #babbbe;
+    border-radius: 9999px;
+    height: 40px;
+    text-align: left;
+    padding-left: 20px;
+    margin-bottom: 15px;
+    width: 300px;
+    line-height: 40px;
+}
+
+#searchTextBrand {
+    margin-left: 8px;
+    color: #b3b4b7;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#brandClear {
+    text-align: center;
+    border-top: 1px solid #e3e4e5;
+    padding-top: 10px;
+}
+
+#brandFilterBox {
+    width: 350px;
+    display: none;
+    position: absolute;
+    top: 490px;
+    left: 250px;
+    z-index: 1;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px #e5e5e5;
+    height: 400px;
+}
+
+/* Sort Filter Start */
+#sortRight {
+    float: right;
+}
+
+#sortFlexDown {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    gap: 25px;
+    padding: 25px;
+    position: absolute;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px #e5e5e5;
+    right: 40px;
+    top: 480px;
+}
+
+.sortFlexSide {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    font-size: 14px;
+    color: #46474a;
+    font-family: Helvetica, Arial, Helvetica, sans-serif;
+}
+
+.sortFlexSide:hover{
+    background-color: #e6f1fc;
+}
+
+.checkTick {
+    height: 20px;
+    width: 20px;
+}
+
+#spanSortText1 {
+    font-weight: 700;
+    color: #2e2f32;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+#spanSortText2 {
+    color: #2e2f32;
+    margin-left: 8px;
+    font-size: 14px;
+    margin-right: 30px;
+}
+
+#sortDropDown {
+    display: none;
+}
+/* Sort Filter End */
+
+/* Price Filter CSS */
+#priceFilterBox {
+    width: 400px;
+    height: 225px;
+    display: none;
+    position: absolute;
+    top: 485px;
+    z-index: 1;
+    background-color: #ffffff;
+    left: 100px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow:0 0 10px #e5e5e5;
+}
+#priceGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 14px;
+}
+#clearPriceFilter {
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid #e3e4e5;
+    padding-top: 10px;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+#priceRange {
+    font-size: 20px;
+    color: #2e2f32;
+    font-weight: 700;
+}
+#priceFilterRange{
+    margin-top: 40px;
+}
+/* End of Price Filter CSS */
+
+/* All Department */
+
+#allFiltersWin {
+    height: 850px;
+    width: 400px;
+    border: 1px solid gray;
+    padding: 30px;
+    position: absolute;
+    top: -10px;
+    left: 1px;
+    background-color: #ffffff;
+    z-index: 0;
+    display: none;
+}
+
+#allFiltersContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+#allFiltersTop {
+    display: grid;
+    grid-template-columns: 1fr 5fr 7fr 1fr;
+    gap: 6px;
+    border-bottom: 1px solid #f1f1f2;
+    padding-bottom: 25px;
+}
+
+.hor-filter-icon {
+    width: 17px;
+    height: 17px;
+}
+
+.allFiltersLeft {
+    float: left;
+}
+
+.allFiltersRight {
+    float: right;
+}
+
+#viewResultsAllFilters {
+    border-radius: 9999px;
+    background-color: #0071dc;
+    color: #ffffff;
+    font-weight: 700;
+    font-family: Hevetica, Arial, Helvetica, sans-serif;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    position: relative;
+    top: 50px;
+}
+
+#allFiltersText {
+    font-weight: 700;
+    font-family: Hevetica, Arial, Helvetica, sans-serif;
+    font-size: 24px;
+}
+
+.cancelAllFilters {
+    height: 25px;
+    width: 25px;
+}
+
+.filter-AllFilters {
+    border-bottom: 1px solid #e3e4e5;
+    height: auto;
+    line-height: 50px;
+    font-size: 18px;
+    color: #2e2f32;
+    font-weight: 700;
+    font-family: Hevetica, Arial, Helvetica, sans-serif;
+}
+
+#allDepartmentsRadio {
+    display: flex;
+    color: #2e2f32;
+    font-weight: 700;
+    font-family: Helvetica, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+#allDeptFlex {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-left: 25px;
+    margin-top: -25px;
+    font-weight: 100;
+}
+
+.allDeptGrid {
+    display: grid;
+    grid-template-columns: 0.5fr 5fr 1fr;
+    color: #515357;
+    font-family: Helvetica, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    height: 20px;
+    margin-top: 10px;
+}
+
+#showMore {
+    font-family: Helvetica, Arial, Helvetica, sans-serif;
+    font-size: .875rem;
+    text-decoration: underline;
+    margin-top: 20px;
+    font-weight: 100;
+}
+
+#department_AllFilters {
+    clear: both;
+    display: none;
+}
+
+#ratingFlex {
+    display: flex;
+    flex-direction: column;
+    clear: both;
+    height: 130px;
+    gap: 20px;
+    margin-bottom: 5px;
+    display: none;
+}
+
+.ratingGrid {
+    display: grid;
+    grid-template-columns: 0.5fr 4fr 1fr;
+    color: #515357;
+    font-family: Helvetica, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 100;
+    height: 30px;
+}
+
+/* End of All Department Filter */
+
+/* Second image in the main page */
+#secondImageAfFilter{
+    border-top: 1px solid #e3e4e5;
+    border-bottom: 1px solid #e3e4e5;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Filter and Sort */
+#putFilters{
+    height: 40px;
+    margin-left: 10px; 
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
